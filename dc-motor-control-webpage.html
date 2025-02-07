@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Motor Speed Control using ANN</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .team-table, .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .team-table th, .team-table td,
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .team-table th, .comparison-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .timeline {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .redirect-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .redirect-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speed Control of DC Motors using Artificial Neural Networks (ANN)</h1>
+        
+        <h2>Project Overview</h2>
+        <p>This project focuses on developing an advanced speed control system for DC motors using Artificial Neural Networks. The system aims to enhance precision, adaptability, and efficiency compared to conventional control methods. The ANN-based approach reduces torque ripple and eliminates the need for physical sensors while ensuring robustness against parameter variations.</p>
+        
+        <h2>Team Members</h2>
+        <table class="team-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+            </tr>
+            <tr>
+                <td>B. SURAJ</td>
+                <td>CB.SC.U4AIE24105</td>
+            </tr>
+            <tr>
+                <td>C. SAI KARTHIK</td>
+                <td>CB.SC.U4AIE24107</td>
+            </tr>
+            <tr>
+                <td>MOHAN INANI</td>
+                <td>CB.SC.U4AIE24136</td>
+            </tr>
+            <tr>
+                <td>VISHNU TEJA</td>
+                <td>CB.SC.U4AIE24130</td>
+            </tr>
+        </table>
+
+        <h2>Objectives</h2>
+        <ul>
+            <li>Develop an ANN-based control system for DC motor speed regulation</li>
+            <li>Implement real-time speed estimation without physical sensors</li>
+            <li>Reduce torque ripple and improve system efficiency</li>
+            <li>Achieve better dynamic response compared to conventional PI controllers</li>
+            <li>Create a robust system capable of handling parameter variations</li>
+        </ul>
+
+        <h2>MATLAB Simulation</h2>
+        <p>Our implementation uses MATLAB/Simulink with the following components:</p>
+        <ul>
+            <li>Neural Network Toolbox for ANN implementation</li>
+            <li>Dual-level neural architecture (ANN-train and ANN-control)</li>
+            <li>5 HP, 240V, 1750 RPM DC motor model</li>
+            <li>Hysteresis current controller</li>
+        </ul>
+        <img src="/api/placeholder/800/400" alt="MATLAB Simulink Model">
+
+        <h2>Manual vs ANN-Based Speed Control</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Manual Control</th>
+                <th>ANN-Based Control</th>
+            </tr>
+            <tr>
+                <td>Uses mechanical/electrical components</td>
+                <td>Employs AI models for dynamic adjustment</td>
+            </tr>
+            <tr>
+                <td>Requires manual tuning</td>
+                <td>Self-adaptive system</td>
+            </tr>
+            <tr>
+                <td>Less precise in varying conditions</td>
+                <td>High precision through real-time learning</td>
+            </tr>
+            <tr>
+                <td>Higher energy losses</td>
+                <td>Optimized energy efficiency</td>
+            </tr>
+            <tr>
+                <td>Slower response time</td>
+                <td>Faster dynamic response</td>
+            </tr>
+        </table>
+
+        <h2>Applications</h2>
+        <ul>
+            <li>Electric Vehicles: Smooth acceleration and efficient power usage</li>
+            <li>Industrial Automation: Precise machinery control</li>
+            <li>Medical Equipment: Accurate control for critical devices</li>
+            <li>Aerospace: Reliable actuator control</li>
+            <li>HVAC Systems: Energy-efficient climate control</li>
+            <li>Robotics: Precise movement control</li>
+        </ul>
+
+        <h2>Project Timeline</h2>
+        <div class="timeline">
+            <p><strong>7-Feb       :</strong> Literature review and system design</p>
+            <p><strong>Mid-Feb:	   :</strong> MATLAB model development</p>
+            <p><strong>Early-March :</strong> ANN implementation and training</p>
+            <p><strong>Mid-March   :</strong> Testing and optimization</p>
+            <p><strong>Late-March  :</strong> Documentation and presentation preparation</p>
+        </div>
+
+        <h2>Advantages</h2>
+        <ul>
+            <li>Improved speed control accuracy</li>
+            <li>Reduced settling time (0.11s vs 0.25s in PI control)</li>
+            <li>Lower torque ripple (0.124% vs 0.35% in PI control)</li>
+            <li>Sensorless operation capability</li>
+            <li>Better adaptation to load variations</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>The ANN-based speed control system demonstrates superior performance compared to conventional methods, achieving higher control quality (0.98), faster response times, and reduced torque ripple. The system proves particularly effective in applications requiring precise speed control under varying conditions.</p>
+
+        <!-- Added Button -->
+        <a href="file:///C:/Users/boorl/OneDrive/college/EEE/dc-motor-control-first-review.html" class="redirect-button">Go to First Review</a>
+    </div>
+</body>
+</html>

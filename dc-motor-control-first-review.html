@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Motor Speed Control - First Review</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .segment {
+            margin-bottom: 40px;
+        }
+        .nav-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .component-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .component-list li {
+            background-color: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="#" onclick="window.history.back()">← Back to Project Overview</a>
+        </div>
+
+        <h1>First Review: Manual Implementation Phase</h1>
+
+        <div class="segment">
+            <h2>Current MATLAB Implementation</h2>
+            <img src="file:///C:/Users/boorl/OneDrive/college/EEE/motor-diagram.png" alt="Motor Diagram">
+            
+            <h3>Circuit Components:</h3>
+            <ul class="component-list">
+                <li>Power Supply (Continuous): DC voltage source for system input</li>
+                <li>DC Motor Block (Parameters):
+                    <ul>
+                        <li>Ra: 2.581 Ω</li>
+                        <li>Rf: 281.3 Ω</li>
+                        <li>La: 0.028 H</li>
+                        <li>Lf: 156 H</li>
+                    </ul>
+                </li>
+                <li>PID Controller: Conventional speed control implementation</li>
+                <li>Measurement Block (100): Speed feedback system</li>
+                <li>Scope Display: Response monitoring</li>
+            </ul>
+
+            <h3>Working Principle:</h3>
+            <p>The current system implements conventional PID control where speed feedback is compared with reference speed. The controller generates voltage signals based on the error, and the motor adjusts speed accordingly. Current metrics show settling time of 0.25s and torque ripple of 0.35%.</p>
+
+            <h3>Future ANN Implementation:</h3>
+            <p>The next phase will replace the PID controller with a neural network that learns optimal control patterns and adapts to load changes automatically. Expected improvements include faster response time and better accuracy.</p>
+        </div>
+    </div>
+</body>
+</html>
