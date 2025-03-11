@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulation - Speed Control of DC Motors using ANN</title>
+  <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --container-bg: #ffffff;
+      --text-color: #333333;
+      --heading-color: #2E4053;
+      --accent-color: #7A73D1;
+      --separator-color: #00ffff;
+      --hover-glow: 0 0 10px rgba(0, 255, 255, 0.8);
+      --button-color: #7AB2F4;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--container-bg);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      color: var(--heading-color);
+      margin-bottom: 10px;
+      transition: all 0.3s ease-in-out;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    h2:hover {
+      text-decoration: underline;
+      box-shadow: var(--hover-glow);
+    }
+
+    p, ul, li {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      margin: 20px 0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    hr.separator {
+      border: none;
+      border-top: 2px solid var(--separator-color);
+      margin: 20px 0;
+    }
+
+    .btn-back {
+      display: block;
+      width: fit-content;
+      margin: 20px auto;
+      background-color: var(--button-color);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+    .btn-back:hover {
+      opacity: 0.9;
+    }
+
+    .logo {
+      display: block;
+      margin: 30px auto 10px auto;
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simulation Model & ANN Output</h1>
+
+    <!-- Simulation Model Screenshot -->
+    <h2>Simulink Model Screenshot</h2>
+    <p>
+      This image shows the Simulink model integrating the DC motor and ANN-based controller in a closed-loop configuration, where the ANN dynamically adjusts the motor input for precise speed regulation.
+    </p>
+    <img src="C:\Users\boorl\OneDrive\college\EEE\Screenshot 2025-03-10 181507.png" alt="DC Motor ANN Simulation Screenshot" />
+
+    <hr class="separator" />
+
+    <!-- NN Training Outputs with Explanations -->
+    <h2>Neural Network Training Outputs</h2>
+    <p>
+      <strong>Output 1:</strong> This plot displays the decline in Mean Squared Error (MSE) during training, indicating that the ANN learns the complex nonlinear relationship between voltage, torque, and motor speed.
+    </p>
+    <img src="C:\Users\boorl\OneDrive\college\EEE\Screenshot 2025-03-10 180408.png" alt="NN Training Output 1" />
+    
+    <p>
+      <strong>Output 2:</strong> This graph confirms the ANN’s convergence, demonstrating stable predictions and reliable performance under varying operating conditions.
+    </p>
+    <img src="C:\Users\boorl\OneDrive\college\EEE\Screenshot 2025-03-10 180807.png" alt="NN Training Output 2" />
+
+    <hr class="separator" />
+
+    <a href="index.html" class="btn-back">&larr; Back to Main Page</a>
+
+    <!-- College Logo as Credit -->
+    <img src="C:\Users\boorl\Downloads\AMRIT-removebg-preview_2.png" alt="College Logo" class="logo">
+    <div class="footer">
+      &copy; 2025 Team ANN DC Motor Control
+    </div>
+  </div>
+</body>
+</html>
