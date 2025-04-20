@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DC Motor Speed Control with ANN</title>
+  <style>
+
+
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: Arial, sans-serif; 
+      background: linear-gradient(to right, #ffffff, #cfe8ff);
+      color: #333; 
+      display: flex; 
+      height: 100vh; 
+    }
+
+    #sidebar {
+      width: 220px;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      justify-content: space-between;
+      height: 100%;
+    }
+    #sidebar .nav-btn {
+      width: 80%;
+      text-align: center;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+      color: #fff;
+      font-size: 1.1em; 
+    }
+    
+#sidebar .nav-btn {
+  background: #50acea;
+  box-shadow: 0 0 10px rgba(77, 184, 255, 0.6);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+#sidebar .nav-btn:hover,
+#sidebar .nav-btn.active {
+  background: #0a6eb1; 
+  box-shadow: 0 0 14px rgba(102, 194, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+
+
+     #content {
+         flex: 1;
+         padding: 40px;
+         overflow-y: auto;
+         display: flex;
+         flex-direction: column;
+         background: #fafafa;
+         background: transparent;   
+         border-radius: 24px; 
+         margin: 10px;
+     }
+
+    .content-wrapper {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    section.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 70vh; 
+    }
+
+    h1 {
+      font-size: 3.2em; 
+      margin-bottom: 30px;
+      color: #4a3b5d;
+      text-shadow: 1px 1px 4px rgba(74,59,93,0.5);
+    }
+    p { 
+      margin-bottom: 20px; 
+      line-height: 1.8; 
+      font-size: 1.2em;
+    }
+    ul { 
+      margin: 20px auto; 
+      text-align: left; 
+      display: inline-block; 
+      font-size: 1.2em;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    img.placeholder {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 30px auto;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+    
+    #logo-container {
+      text-align: center;
+      margin-top: 40px;
+      padding-bottom: 20px;
+    }
+    #logo {
+      width: 60px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <div class="nav-btn active" data-target="home">HOME</div>
+    <div class="nav-btn" data-target="intro">INTRODUCTION</div>
+    <div class="nav-btn" data-target="lit-review">LITERATURE REVIEW</div>
+    <div class="nav-btn" data-target="objective">OBJECTIVE</div>
+    <div class="nav-btn" data-target="problem">PROBLEM STATEMENT</div>
+    <div class="nav-btn" data-target="block-diagram">BLOCK DIAGRAM</div>
+    <div class="nav-btn" data-target="methodology">METHODOLOGY</div>
+    <div class="nav-btn" data-target="simulink">SIMULINK MODEL</div>
+    <div class="nav-btn" data-target="results">RESULTS</div>
+    <div class="nav-btn" data-target="conclusion">CONCLUSION</div>
+  </nav>
+
+  <main id="content">
+    <div class="content-wrapper">
+      <section id="home" class="active">
+        <h1>Speed Control of DC Motor Using Artificial Neural Network</h1>
+        <p><strong>Team Members &amp; Roll Numbers:</strong></p>
+        <ul>
+          <li>BURLA SURAJ  - CB.SC.U4AIE24105</li>
+          <li>VISHNU TEJA  - CB.SC.U4AIE24130</li>
+          <li>SAI KARTHIK  - CB.SC.U4AIE24107</li>
+          <li>MOHAN INANI  - CB.SC.U4AIE24136</li>
+        </ul>
+      </section>
+
+      <section id="intro">
+        <h1>Introduction</h1>
+        <p>DC motors are commonly employed in industry because of their ease and efficiency of speed control. Conventional PID controllers have been employed for this, but they tend to fail in the presence of nonlinearities and varying load conditions. This project investigates the application of an Artificial Neural Network (ANN) to control the speed of a DC motor. The ANN is trained on input data—current, voltage, and load—to estimate the desired speed. Performance of the ANN is then compared against that of a standard PID controller to assess any gains in adaptability and precision..</p>
+      </section>
+
+      <section id="lit-review">
+        <h1>Literature Review</h1>
+        <p>This section summarizes key research papers on DC motor speed control using Artificial Neural Networks (ANNs), highlighting their contributions and limitations. The limitations identified have been addressed in our project to enhance performance and accuracy.</p>
+      
+        <table style="width:100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <thead style="background-color: #007BFF; color: white;">
+            <tr>
+              <th style="padding: 12px; text-align: left;">Paper Title</th>
+              <th style="padding: 12px; text-align: left;">Year</th>
+              <th style="padding: 12px; text-align: left;">Key Insights</th>
+              <th style="padding: 12px; text-align: left;">Limitations Addressed in Our Project</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #f9f9f9;">
+              <td style="padding: 12px;">Speed Control of DC Motors Using an Artificial Neural Network</td>
+              <td style="padding: 12px;">2017</td>
+              <td style="padding: 12px;">Introduced a neural identifier and controller for estimating motor speed and generating control signals, respectively, using the Levenberg-Marquardt back-propagation algorithm.</td>
+              <td style="padding: 12px;">Limited by the complexity of the back-propagation algorithm and the need for extensive training data. Our project simplifies the training process and reduces data requirements.</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px;">Speed Control of DC Motor Using Artificial Neural Network</td>
+              <td style="padding: 12px;">2017</td>
+              <td style="padding: 12px;">Utilized the NARMA-L2 controller for speed control under varying load conditions, demonstrating the effectiveness of ANN in real-time applications.</td>
+              <td style="padding: 12px;">The NARMA-L2 controller's performance can degrade under highly dynamic conditions. Our approach incorporates adaptive mechanisms to maintain performance under such conditions.</td>
+            </tr>
+            <tr style="background-color: #f9f9f9;">
+              <td style="padding: 12px;">A Neural Network Based Speed Control for DC Motor</td>
+              <td style="padding: 12px;">2009</td>
+              <td style="padding: 12px;">Proposed a two-part neural control scheme with a neural estimator and controller, trained using the Levenberg-Marquardt back-propagation algorithm.</td>
+              <td style="padding: 12px;">The reliance on back-propagation can lead to slow convergence and local minima issues. Our project employs alternative training methods to enhance convergence speed and accuracy.</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px;">Speed Control of DC Motor by Using Neural Network Parameter Tuner for PI-controller</td>
+              <td style="padding: 12px;">2017</td>
+              <td style="padding: 12px;">Developed a neural network parameter tuner to optimize PI controller parameters, aiming to improve speed control performance.</td>
+              <td style="padding: 12px;">The approach may not adapt well to non-linearities and varying system dynamics. Our project integrates a more flexible control strategy to handle such variations effectively.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+
+      <section id="objective">
+        <h1>Objective</h1>
+        <ul>
+          <li>To design and implement an ANN-based controller for DC motor speed regulation.​</li>
+          <li>To train the ANN using a dataset comprising current, voltage, and load as inputs, with the corresponding motor speed as the output.</li>
+          <li>To integrate the trained ANN into a MATLAB/Simulink environment, enabling real-time speed prediction and control.</li>
+          <li>To compare the performance of the ANN-based controller with a traditional PID controller under various operating conditions, assessing metrics such as response time, stability, and accuracy.</li>
+        </ul>
+      </section>
+
+      <section id="problem">
+        <h1>Problem Statement</h1>
+        <p>Traditional PID controllers are limited in terms of managing nonlinear behavior and changing load conditions in DC motors. There is a requirement for a more adaptive and precise control approach to keep the desired motor speed under such situations</p>
+      </section>
+
+      <section id="block-diagram">
+        <h1>Block Diagram</h1>
+        <img src="C:\Users\boorl\Pictures\Screenshots\Screenshot 2025-04-19 025243.png" alt="Block Diagram" class="placeholder" />
+        <p>Figure: Generalized SEDC drive system with ANN in the feedback loop.</p>
+      </section>
+
+      <style>
+        #methodology {
+          padding: 30px;
+          font-family: Arial, sans-serif;
+          line-height: 1.8;
+        }
+      
+        #methodology h1 {
+          color: #003366;
+          font-size: 28px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+      
+        #methodology h2 {
+          color: #0077cc;
+          font-size: 22px;
+          font-weight: bold;
+          margin-top: 40px;
+          margin-bottom: 20px;
+          text-shadow: 1px 1px 5px rgba(0, 119, 204, 0.4);
+        }
+      
+        #methodology ul {
+          margin-left: 25px;
+          padding-left: 15px;
+        }
+      
+        #methodology ul li {
+          margin-bottom: 15px;
+        }
+      
+        .note {
+          background-color: #fff3cd;
+          border-left: 5px solid #ffc107;
+          padding: 15px;
+          margin-top: 25px;
+          margin-bottom: 40px;
+          font-style: italic;
+          color: #856404;
+          font-size: 16px;
+        }
+      
+        .flowchart-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 18px;
+          margin-top: 30px;
+        }
+      
+        .flowchart-box {
+          background-color: #e6f2ff;
+          border: 2px solid #3399ff;
+          border-radius: 8px;
+          padding: 14px 28px;
+          text-align: center;
+          min-width: 280px;
+          font-weight: bold;
+          position: relative;
+          box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+        }
+      
+        .arrow {
+          width: 0;
+          height: 0;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-top: 16px solid #3399ff;
+        }
+      </style>
+      
+      <section id="methodology">
+        <h1>Methodology</h1>
+        <p>
+          The proposed system uses a feedforward Artificial Neural Network (ANN) to control the speed of a Separately Excited DC (SEDC) motor. This motor has independent armature and field windings, and speed regulation is achieved by adjusting the armature voltage. Since the motor speed is closely related to the back EMF, which depends on armature voltage, this method allows precise control.
+        </p>
+      
+        <h2>Step-by-Step Breakdown:</h2>
+        <ul>
+          <li><strong>Data Acquisition:</strong> A dataset comprising optimal speed, current, voltage, and torque values was obtained from online research and pre-existing sources.</li>
+          <li><strong>ANN Training:</strong> A feedforward neural network was trained on this dataset to understand the relationship between input parameters and motor speed. The trained weights and biases were saved in the MATLAB workspace.</li>
+          <li><strong>Real-Time Simulation:</strong> In Simulink, the system continuously measures current, voltage, and torque from the motor.</li>
+          <li><strong>Function Block Execution:</strong> These real-time values are passed to a function block that loads the trained ANN model from the MATLAB workspace and predicts the motor speed.</li>
+          <li><strong>Control Action:</strong> The predicted speed is converted into a control signal that adjusts the armature voltage to regulate the actual motor speed.</li>
+          <li><strong>Adaptive Loop:</strong> As the torque and load vary, the system dynamically re-evaluates and re-applies the ANN predictions in a continuous loop.</li>
+        </ul>
+      
+        <div class="note">
+          <strong>Note:</strong> The dataset used for ANN training was not self-generated but collected from reliable online sources.
+        </div>
+      
+        <h2>Flow of Methodology:</h2>
+        <div class="flowchart-container">
+          <div class="flowchart-box">Dataset Sourced from Internet</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Train Feedforward ANN</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Save ANN Weights in MATLAB Workspace</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Simulink Measures Current, Voltage, Torque</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Function Block Loads ANN Model</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Predict Speed Using ANN</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Generate Control Signal</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Adjust Armature Voltage</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Motor Speed Regulated</div>
+          <div class="arrow"></div>
+          <div class="flowchart-box">Loop Continues with New Inputs</div>
+        </div>
+      
+        <p style="margin-top: 30px;">
+          This adaptive ANN-based approach allows the motor to respond in real time to changing load conditions, maintaining precise speed control and reducing oscillations, thereby outperforming conventional PID methods.
+        </p>
+      </section>
+      
+      
+      
+
+      <section id="simulink">
+        <h1>Simulink Model</h1>
+        <img src="C:\Users\boorl\Pictures\Screenshots\Screenshot 2025-04-14 141508.png" alt="Simulink Model" class="placeholder" />
+        <p>Figure: ANN Integrated simulink model.</p>
+      </section>
+
+      <section id="results">
+        <h1>Results</h1>
+        
+        <p>The ANN controller achieved faster settling time, lower overshoot, and reduced torque ripple under varying load conditions compared to PI control.</p>
+    
+        <div class="image-container">
+            <h2>Without ANN (PID Controller)</h2>
+            <p>Without the ANN model (using the PID controller), the system shows less accuracy, greater oscillations, and the system struggles to reach the desired speed accurately. The difference between the desired and actual speed is more noticeable.</p>
+            <div class="scrollable-images">
+                <img src="E:\college\EEE\withoutANN result.jpg" alt="Without ANN (PID Controller)" class="result-image">
+            </div>
+        </div>
+        
+        <div class="image-container">
+            <h2>With ANN (ANN Controller)</h2>
+            <p>With the ANN model, the speed is predicted through a function block, leading to higher accuracy and less oscillation. The system reaches the desired speed with improved performance.</p>
+            <div class="scrollable-images">
+                <img src="E:\college\EEE\withANN result.jpg" alt="With ANN (ANN Controller)" class="result-image">
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        /* Ensure images are large enough to see the oscillations clearly */
+        .result-image {
+            width: 100%; /* Make the image take the full width of its container */
+            height: auto; /* Maintain aspect ratio */
+        }
+    
+        /* Style the scrollable container */
+        .scrollable-images {
+            width: 100%; /* Container takes full width */
+            height: 500px; /* Adjust the height to fit the image size */
+            overflow-y: scroll; /* Enable scrolling */
+            margin-bottom: 30px; /* Space below the container */
+            border: 2px solid #ccc; /* Optional border for styling */
+        }
+    
+        .image-container {
+            margin-bottom: 20px;
+        }
+    </style>
+    
+      <section id="conclusion">
+        <h1>Conclusion</h1>
+        <p>ANN-based speed control provides superior performance and robustness for SEDC drives, making it a promising solution for industrial variable-speed applications.</p>
+      </section>
+    </div>
+    
+    <style>
+
+  #logo {
+    width: 180px; /* 60px × 3 */
+    opacity: 0.8;
+    height: auto;
+  }
+</style>
+
+<div id="logo-container">
+  <img id="logo" src="C:\Users\boorl\Downloads\AMRIT-removebg-preview_2.png" alt="College Logo" />
+</div>
+
+
+  <script>
+    const buttons = document.querySelectorAll('#sidebar .nav-btn');
+    const sections = document.querySelectorAll('main section');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const target = btn.getAttribute('data-target');
+        sections.forEach(sec => {
+          if (sec.id === target) sec.classList.add('active');
+          else sec.classList.remove('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
